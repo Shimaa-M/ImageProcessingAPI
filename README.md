@@ -3,10 +3,10 @@
 ### General info
 this project for resizing image in browser with query params
 
-## Technologies
+### Technologies
 sharp/ typescript/ nodejs
 
-## Setup
+### Setup
 download the folder to your local machine
 ```
 $ npm init
@@ -17,6 +17,9 @@ $ npm run start
 ### Test
 npm run test
 
+### Endpoint to test
+#### you can insert any value for width and height and any file name of image you want to resize
+/images?filename=jford.jpg&width=400&height=600
 
 
 
