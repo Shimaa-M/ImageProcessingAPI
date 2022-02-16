@@ -19,7 +19,7 @@ npm run test
 
 ### Endpoint to test
 #### you can insert any value for width and height and any file name of image you want to resize
-/images?filename=jford.jpg&width=400&height=600
+/image?filename=jford.jpg&width=400&height=600
 
 
 
