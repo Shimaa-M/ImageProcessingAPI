@@ -13,15 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const sharp_1 = __importDefault(require("sharp"));
-const resize = (filename, img_width, img_height) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        yield (0, sharp_1.default)(`./assets/images/${filename}.jpg`).resize({
-            width: img_width,
-            height: img_height
-        }).toFormat("jpg").toFile(`./assets/thumb/${filename}.jpg`);
-    }
-    catch (error) {
-        yield Promise.reject(new Error("missing input file"));
-    }
+const resize = (filename, width, height) => __awaiter(void 0, void 0, void 0, function* () {
+    const done = yield (0, sharp_1.default)(`./assets/images/${filename}.jpg`)
+        .resize({ width, height })
+        .toFormat('jpg')
+        .toFile(`./assets/thumb/${filename}.jpg`).catch((err) => {
+        return ['false', err.message];
+    });
+    return done;
 });
 exports.default = resize;
