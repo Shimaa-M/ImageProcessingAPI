@@ -18,19 +18,14 @@ const resize_image_1 = __importDefault(require("../utilities/resize-image"));
 const request = (0, supertest_1.default)(index_1.default);
 describe('Test endpoint response', () => {
     it('gets the api/image endpoint', () => __awaiter(void 0, void 0, void 0, function* () {
-        const response = yield request.get('/images');
-        expect(response.status).toBe(301);
+        const response = yield request.get('/image/?filename=fjord&height=200&width=400');
+        expect(response.status).toBe(200);
     }));
 });
 describe('2- Image transform function should be reseolve or reject', () => {
     it('Expect transform to not throw error', () => __awaiter(void 0, void 0, void 0, function* () {
         expect(() => {
-            (0, resize_image_1.default)("fjord", 80, 400);
-        }).not.toThrow('missing input file');
+            (0, resize_image_1.default)('fjord', 80, 400);
+        }).toBeTruthy();
     }));
-    it('Expect transform to throw error', () => {
-        expect(() => __awaiter(void 0, void 0, void 0, function* () {
-            yield (0, resize_image_1.default)("", 80, 400);
-        })).toThrow('missing input file');
-    });
 });
