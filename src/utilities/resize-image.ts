@@ -7,7 +7,7 @@ const resize = async ( filename : string,width: number ,height: number) : Promis
     .toFormat('jpg')
     .toFile(`./assets/thumb/${filename}.jpg`).catch((err) => {
         return ['false',err.message];
-    }) 
+    }); 
     return done;
 };
 export default resize;

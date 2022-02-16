@@ -27,30 +27,33 @@ imageRoute.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             .replace(/=/g, '":"') +
         '"}');
     const notValid = (0, validateInputs_1.default)(params);
+   
     if (notValid) {
-        return res.status(400).send("Missing input value");
+        return res.status(400).end('Missing input value');
     }
     const parsedParams = {
         filename: params.filename,
         width: parseInt(params.width),
         height: parseInt(params.height)
     };
+    if (isNaN(parsedParams.width) || isNaN(parsedParams.height)) {
+        return res.status(400).end('Invalid width or height');
+    }
     const mykey = parsedParams.filename + parsedParams.width + parsedParams.height;
     const existInCache = myCache.get(mykey);
     if (existInCache == undefined) {
         const done = yield (0, resize_image_1.default)(parsedParams.filename, parsedParams.width, parsedParams.height);
         const Done = done;
-        console.log(Done[0]);
         if (Done[0] == 'false') {
             return res.status(400).send(Done[1]);
         }
-        res.writeHead(200, { 'Content-Type': 'image/jpg' });
-        res.end(yield fs_1.promises.readFile(`./assets/thumb/${parsedParams.filename}.jpg`));
+        return res.writeHead(200, { 'Content-Type': 'image/jpg' })
+            .end(yield fs_1.promises.readFile(`./assets/thumb/${parsedParams.filename}.jpg`));
         myCache.set(mykey, `./assets/thumb/${parsedParams.filename}.jpg`);
     }
     else {
-        res.writeHead(200, { 'Content-Type': 'image/jpg' });
-        res.end(yield fs_1.promises.readFile(existInCache));
+        return res.writeHead(200, { 'Content-Type': 'image/jpg' })
+            .end(yield fs_1.promises.readFile(existInCache));
     }
 }));
 exports.default = imageRoute;
