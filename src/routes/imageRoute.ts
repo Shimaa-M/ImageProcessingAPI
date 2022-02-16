@@ -19,7 +19,7 @@ imageRoute.get('/', async (req, res) => {
     );
     const notValid = validateParams(params);
     if(notValid){
-       return res.status(400).send("Missing input value");
+       return res.status(400).send('Missing input value');
     }
     const parsedParams : parsedQueryParams ={
       filename : params.filename,   
