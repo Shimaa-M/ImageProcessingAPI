@@ -25,7 +25,7 @@ imageRoute.get('/', async (req, res) => {
       filename : params.filename,   
       width : parseInt(params.width),
       height : parseInt(params.height)
-    }
+    };
 
     const mykey: string = parsedParams.filename+parsedParams.width+parsedParams.height;
     const existInCache: unknown = myCache.get(mykey);
